@@ -13,6 +13,7 @@ body {
 .book-div {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: gray;
     padding: 2rem;
     margin: 2rem;
@@ -35,6 +36,9 @@ button {
     background-color: rgb(109, 4, 4);
     padding: 1rem;
     color: white;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
+}
+
+.read {
+    background-color: green;
 }

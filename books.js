@@ -4,16 +4,20 @@ const formContainer = document.querySelector("#form-container");
 
 let myLibrary = [];
 
+// constructor for book objects
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
   this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
+    return `${title} by ${author}, ${pages} pages`;
   };
   this.index = myLibrary.length;
 }
+
+// fucntion to initialise constructor then push new object to myLibrary
 
 function addBookToLibrary(title, author, pages, read) {
   const newBook = new Book(title, author, pages, read);
@@ -43,6 +47,18 @@ function deleteBook(index) {
   displayBooks();
 }
 
+// toggle read status function
+
+function toggleRead(index, status) {
+  if (status == "read") {
+    myLibrary[index].read = "not read yet";
+    displayBooks();
+  } else if (status == "not read yet") {
+    myLibrary[index].read = "read";
+    displayBooks();
+  }
+}
+
 //create book list from myLibrary array
 
 function displayBooks() {
@@ -51,6 +67,18 @@ function displayBooks() {
     const book = document.createElement("div");
     book.classList.add("book-div");
     book.textContent = element.info();
+    const readBtn = document.createElement("button");
+    readBtn.id = "read-btn";
+    readBtn.textContent = element.read;
+    if (element.read == "read") {
+      readBtn.classList = "read";
+    } else {
+      readBtn.classList = "unread";
+    }
+    readBtn.addEventListener("click", () => {
+      toggleRead(element.index, element.read);
+    });
+    book.appendChild(readBtn);
     const delBtn = document.createElement("button");
     delBtn.textContent = "Delete book";
     delBtn.addEventListener("click", () => {
