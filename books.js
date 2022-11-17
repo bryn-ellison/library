@@ -141,6 +141,8 @@ function createForm() {
   formContainer.appendChild(form);
 }
 
+// create new book button
+
 const button = document.createElement("button");
 button.textContent = "NEW BOOK";
 button.id = "new-button";
@@ -148,5 +150,3 @@ button.addEventListener("click", () => {
   createForm();
 });
 buttonContainer.appendChild(button);
-
-console.log(myLibrary);
