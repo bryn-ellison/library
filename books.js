@@ -5,14 +5,14 @@ const formContainer = document.querySelector("#form-container");
 let myLibrary = [];
 
 function Book(title, author, pages, read) {
-  console.log(read);
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
   this.info = function () {
-    return `${title} by ${author}, ${pages}, ${read}`;
+    return `${title} by ${author}, ${pages} pages, ${read}`;
   };
+  this.index = myLibrary.length;
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -33,6 +33,16 @@ function removeAllChildNodes(parent) {
   }
 }
 
+// delete book function
+
+function deleteBook(index) {
+  myLibrary.splice(index, 1);
+  myLibrary.forEach((element) => {
+    element.index -= 1;
+  });
+  displayBooks();
+}
+
 //create book list from myLibrary array
 
 function displayBooks() {
@@ -41,6 +51,12 @@ function displayBooks() {
     const book = document.createElement("div");
     book.classList.add("book-div");
     book.textContent = element.info();
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete book";
+    delBtn.addEventListener("click", () => {
+      deleteBook(element.index);
+    });
+    book.appendChild(delBtn);
     container.appendChild(book);
   });
 }
@@ -104,3 +120,5 @@ button.addEventListener("click", () => {
   createForm();
 });
 buttonContainer.appendChild(button);
+
+console.log(myLibrary);
